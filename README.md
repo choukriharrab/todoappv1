@@ -11,8 +11,7 @@ This README provides an overview of the structure and functionality of the Demo 
 5. [Services](#services)
 6. [Controllers](#controllers)
 7. [Exception Handling](#exception-handling)
-8. [Bonus: Swagger Documentation](#bonus-swagger-documentation)
-
+   
 ## Overview
 
 The Demo Application is a Spring Boot-based RESTful API that manages tasks and users. It provides endpoints for performing CRUD (Create, Read, Update, Delete) operations on tasks and users. The application architecture follows a typical MVC (Model-View-Controller) pattern.
