@@ -2,22 +2,18 @@ package com.example.demo.Service;
 
 import com.example.demo.Entity.DTO.UserRequestDto;
 import com.example.demo.Entity.DTO.UserResponseDto;
-import com.example.demo.MyExceptions.NoUserFound;
-import com.example.demo.MyExceptions.UserAlreadyExists;
-import com.example.demo.MyExceptions.UserNotFound;
-import com.example.demo.Repository.UserRepo;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.demo.MyExceptions.AlreadyExistsException;
+import com.example.demo.MyExceptions.EmptyEntryException;
+import com.example.demo.MyExceptions.NotFoundException;
 
 import java.util.List;
 
 public interface UserService {
-    List<UserResponseDto> getAllUsers() throws NoUserFound;
-    UserResponseDto createUser(UserRequestDto userDto) throws UserAlreadyExists;
-    void deleteUser(Long id) throws UserNotFound;
-    Object getUserById(Long id) throws UserNotFound;
-    UserResponseDto addUser(UserRequestDto userDto);
-    UserResponseDto updateUser(Long id, UserRequestDto userDto) throws UserNotFound;
-    boolean isValidEmail();
+    public boolean isUserIdExists(Long taskId);
+    List<UserResponseDto> getAllUsers() throws NotFoundException;
+    UserResponseDto createUser(UserRequestDto userDto) throws AlreadyExistsException;
+    void deleteUser(Long id) throws  NotFoundException, EmptyEntryException;
+    Object getUserById(Long id) throws  NotFoundException, EmptyEntryException ;
+    UserResponseDto updateUser(Long id, UserRequestDto userDto) throws NotFoundException;
 
 }

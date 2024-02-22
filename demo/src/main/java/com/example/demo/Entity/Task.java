@@ -21,7 +21,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     //Check if null
-    @Column(name = "title")
+    @Column(name = "title", unique = true)
     @NotNull(message = "Title cannot be null!")
     private String title;
     @Column(name = "description")

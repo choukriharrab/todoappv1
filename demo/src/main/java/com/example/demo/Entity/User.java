@@ -32,8 +32,6 @@ public class User {
 
     //Check if null & validate email & unique
     @Column(name = "email", unique = true)
-    @NonNull
-    @Email(message = "Invalid email format!")
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

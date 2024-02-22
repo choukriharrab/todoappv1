@@ -1,44 +1,42 @@
 package com.example.demo.MyExceptions;
 
+import jakarta.validation.ConstraintViolation;
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<String> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ResponseEntity<?> handleAlreadyExistsException(AlreadyExistsException ex) {
+        ErrorBody errorBody = new ErrorBody(new Date(), HttpStatus.NOT_ACCEPTABLE, Arrays.asList(ex.getMessage()));
+        // Return ResponseEntity
+        return new ResponseEntity<>(errorBody, errorBody.getStatus());
     }
-    @ExceptionHandler(UserNotFound.class)
-    public ResponseEntity<String> handleUserNotFound(UserNotFound ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(NoUserFound.class)
-    public ResponseEntity<String> handleNoUserFound(NoUserFound ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(UserAlreadyExists.class)
-    public ResponseEntity<String> handleUserAlreadyExists(UserAlreadyExists ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(TaskNotFound.class)
-    public ResponseEntity<String> handleTaskNotFound(TaskNotFound ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(NoTaskFound.class)
-    public ResponseEntity<String> handleNoTaskFound(NoTaskFound ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(TaskAlreadyExists.class)
-    public ResponseEntity<String> handleTaskAlreadyExists(TaskAlreadyExists ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> handleUserNotFound(NotFoundException ex) {
+        ErrorBody errorBody = new ErrorBody(new Date(), HttpStatus.NOT_FOUND, Arrays.asList(ex.getMessage()));
+        // Return ResponseEntity
+        return new ResponseEntity<>(errorBody, errorBody.getStatus());    }
+
     @ExceptionHandler(DataNotValidException.class)
-    public ResponseEntity<String> handleDataNotValidException(DataNotValidException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> handleDataNotValidException(DataNotValidException ex) {
+        ErrorBody errorBody = new ErrorBody(new Date(), HttpStatus.NOT_ACCEPTABLE, Arrays.asList(ex.getMessage()));
+        // Return ResponseEntity
+        return new ResponseEntity<>(errorBody, errorBody.getStatus());    }
+
+    @ExceptionHandler(EmptyEntryException.class)
+    public ResponseEntity<?> emptyEntryExceptionHandler(EmptyEntryException ex){
+        ErrorBody errorBody = new ErrorBody(new Date(), HttpStatus.NOT_ACCEPTABLE, Arrays.asList(ex.getMessage()));
+        // Return ResponseEntity
+        return new ResponseEntity<>(errorBody, errorBody.getStatus());
     }
 
 
