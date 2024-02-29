@@ -1,10 +1,8 @@
 package com.example.UsersMS.Utils;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
